@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.0.RELEASE</version>
+		<relativePath />
+	</parent>
+
+	<groupId>fr.entoria</groupId>
+	<artifactId>ged-bdoc-parent</artifactId>
+	<version>0.0.8-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Ged BDOC Parent</name>
+	<description>Parent for Ged BDOC</description>
+
+	<modules>
+		<module>ged-bdoc-api</module>
+		<module>ged-bdoc-mapping</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>fr.entoria</groupId>
+				<artifactId>ged-bdoc-mapping</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+			<dependency>
+				<groupId>commons-validator</groupId>
+				<artifactId>commons-validator</artifactId>
+				<version>1.6</version>
+			</dependency>
+			<!-- SWAGGER -->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>2.9.2</version>
+			</dependency>
+			<!-- SWAGGER UI -->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>2.9.2</version>
+			</dependency>
+			<!-- SPRING RETRY -->
+			<dependency>
+				<groupId>org.springframework.retry</groupId>
+				<artifactId>spring-retry</artifactId>
+				<version>1.3.0</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aspects</artifactId>
+				<version>5.2.8.RELEASE</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<scm>
+		<connection>scm:git:http://git-cipres.intranet.groupemolitor.fr/SOA/cypress-api.git</connection>
+		<developerConnection>scm:git:http://git-cipres.intranet.groupemolitor.fr/SOA/cypress-api.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>deployer</id>
+			<name>release customer project</name>
+			<url>http://nexus-cipres.intranet.groupemolitor.fr/repository/cipres-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>deployer</id>
+			<name>snapshot customer project</name>
+			<url>http://nexus-cipres.intranet.groupemolitor.fr/repository/cipres-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>

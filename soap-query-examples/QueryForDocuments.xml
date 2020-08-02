@@ -1,0 +1,33 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cyp="http://asg.com/cypress_wcfsvc_v73/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<SOAP-ENV:Header/>
+	<SOAP-ENV:Body>
+		<QueryForDocuments xmlns="http://asg.com/cypress_wcfsvc_v73/">
+			<cyp:UserCredential>
+				<cyp:CredentialType>UserIdPassword</cyp:CredentialType>
+				<cyp:DomainName>molitor</cyp:DomainName>
+				<cyp:UserName>srv_bdoc</cyp:UserName>
+				<cyp:Password>28awuS+eBrEm</cyp:Password>
+				<cyp:CypWsUserId/>
+				<cyp:CredentialData/>
+			</cyp:UserCredential>
+			<cyp:QueryCriteria>[Document System Type] = 1 AND [DOCUMENT_IDENT]=&quot;3008073&quot;</cyp:QueryCriteria>
+			<cyp:ReqDocInfo>
+				<cyp:DocId>0</cyp:DocId>
+				<cyp:DocDbase/>
+				<cyp:ReqInfo>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocType</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocTitle</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocCreateTstamp</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocTotalPages</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocContent</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocIndexList</cyp:CWS_REQ_DOC_INFO_ID>
+				</cyp:ReqInfo>
+				<cyp:ReqInx/>
+				<cyp:ReqVars/>
+			</cyp:ReqDocInfo>
+			<cyp:ReqOptQry>
+				<cyp:Options/>
+			</cyp:ReqOptQry>
+		</QueryForDocuments>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

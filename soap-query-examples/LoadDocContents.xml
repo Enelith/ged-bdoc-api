@@ -1,0 +1,45 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cyp="http://asg.com/cypress_wcfsvc_v73/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<SOAP-ENV:Header/>
+	<SOAP-ENV:Body>
+		<LoadDocContents xmlns="http://asg.com/cypress_wcfsvc_v73/">
+			<cyp:UserCredential>
+				<cyp:CredentialType>UserIdPassword</cyp:CredentialType>
+				<cyp:DomainName>molitor</cyp:DomainName>
+				<cyp:UserName>srv_bdoc</cyp:UserName>
+				<cyp:Password>28awuS+eBrEm</cyp:Password>
+				<cyp:CypWsUserId/>
+				<cyp:CredentialData/>
+			</cyp:UserCredential>
+			<cyp:ReqDocInfo>
+				<cyp:DocId>21515</cyp:DocId>
+				<cyp:DocDbase/>
+				<cyp:ReqInfo>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocTitle</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocType</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocTotalPages</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocCreateTstamp</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocContent</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocPgSet</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocTotalPages</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocResHeader</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocFileExt</cyp:CWS_REQ_DOC_INFO_ID>
+					<cyp:CWS_REQ_DOC_INFO_ID>DocIndexList</cyp:CWS_REQ_DOC_INFO_ID>
+				</cyp:ReqInfo>
+				<cyp:ReqInx/>
+				<cyp:ReqVars/>
+			</cyp:ReqDocInfo>
+			<cyp:ReqOptDoc>
+				<cyp:Options>
+					<cyp:CwsReqOptDocItem>
+						<cyp:Id>OutputFormat</cyp:Id>
+						<cyp:Val xs:xmlns="http://www.w3.org/2001/XMLSchema" xsi:type="xs:int" xsi:xmlns="http://www.w3.org/2001/XMLSchema-instance">3</cyp:Val>
+					</cyp:CwsReqOptDocItem>
+					<cyp:CwsReqOptDocItem>
+						<cyp:Id>Dialect</cyp:Id>
+						<cyp:Val xs:xmlns="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string" xsi:xmlns="http://www.w3.org/2001/XMLSchema-instance">raster(never)</cyp:Val>
+					</cyp:CwsReqOptDocItem>
+				</cyp:Options>
+			</cyp:ReqOptDoc>
+		</LoadDocContents>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

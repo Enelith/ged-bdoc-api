@@ -1,0 +1,19 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cyp="http://asg.com/cypress_wcfsvc_v73/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cyp:IsDocumentExist>
+         <!--Optional:-->
+         <cyp:UserCredential>
+            <cyp:CredentialType>UserIdPassword</cyp:CredentialType>
+            <cyp:DomainName>molitor</cyp:DomainName>
+            <cyp:UserName>srv_bdoc</cyp:UserName>
+            <cyp:Password>28awuS+eBrEm</cyp:Password>
+            <cyp:CypWsUserId/>
+            <cyp:CredentialData/>
+         </cyp:UserCredential>
+         <!--Optional:-->
+         <cyp:DocuVault>DocuRec</cyp:DocuVault>
+         <cyp:DocumentId>?</cyp:DocumentId>
+      </cyp:IsDocumentExist>
+   </soapenv:Body>
+</soapenv:Envelope>
