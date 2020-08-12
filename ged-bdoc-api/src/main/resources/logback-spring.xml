@@ -6,9 +6,9 @@
 
     <jmxConfigurator/>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>C:/WORKSPACE/logs/ged-bdoc-api.log</file>
+        <file>${LOG_PATH}/ged-bdoc-api.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>%d{yyyyMMdd}-ged-bdoc-api.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/%d{yyyyMMdd}-ged-bdoc-api.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <totalSizeCap>500MB</totalSizeCap>
         </rollingPolicy>

@@ -11,10 +11,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /*
  * Swagger Class
- * http://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
- *  To test :
- * <Path to app>/v2/api-docs
- * <Path to app>/swagger-ui.html
+ * http://www.baeldung.com/swagger-2-documentation-for-spring-rest-api To test :
+ * <Path to app>/v2/api-docs <Path to app>/swagger-ui.html
  */
 @Configuration
 @EnableSwagger2
@@ -23,7 +21,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
 	return new Docket(DocumentationType.SWAGGER_2).select()
-		    .apis(RequestHandlerSelectors.any())
+		    .apis(RequestHandlerSelectors.basePackage("fr.entoria.ged.bdoc.controller"))
 		    .paths(PathSelectors.any())
 		    .build();
     }
