@@ -1,5 +1,10 @@
 package fr.entoria.ged.bdoc.requests;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.entoria.ged.bdoc.models.query.ActionOnIndexes;
+
 public class GedBdocApiRequest {
     private Integer requestId;
 
@@ -11,18 +16,22 @@ public class GedBdocApiRequest {
 
     private String query;
 
+    private List<ActionOnIndexes> actionsOnIndexes = new ArrayList<>();
+
     public GedBdocApiRequest() {
 	super();
 	// TODO Auto-generated constructor stub
     }
 
-    public GedBdocApiRequest(Integer requestId, String domain, String username, String password, String query) {
+    public GedBdocApiRequest(Integer requestId, String domain, String username, String password, String query,
+		List<ActionOnIndexes> actionsOnIndexes) {
 	super();
 	this.requestId = requestId;
 	this.domain = domain;
 	this.username = username;
 	this.password = password;
 	this.query = query;
+	this.actionsOnIndexes = actionsOnIndexes;
     }
 
     public Integer getRequestId() {
@@ -63,5 +72,13 @@ public class GedBdocApiRequest {
 
     public void setQuery(String query) {
 	this.query = query;
+    }
+
+    public List<ActionOnIndexes> getActionsOnIndexes() {
+	return actionsOnIndexes;
+    }
+
+    public void setActionsOnIndexes(List<ActionOnIndexes> actionsOnIndexes) {
+	this.actionsOnIndexes = actionsOnIndexes;
     }
 }

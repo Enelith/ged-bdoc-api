@@ -11,10 +11,15 @@ import org.springframework.stereotype.Component;
 import fr.entoria.ged.bdoc.api.Token;
 import fr.entoria.ged.bdoc.business.IBdocBusiness;
 import fr.entoria.ged.bdoc.business.ICaching;
+import fr.entoria.ged.bdoc.exceptions.InvalidGedBdocApiArgumentsException;
+import fr.entoria.ged.bdoc.models.AddDocIndexesResponse;
+import fr.entoria.ged.bdoc.models.DeleteDocIndexesResponse;
 import fr.entoria.ged.bdoc.models.IsDocumentExistResponse;
 import fr.entoria.ged.bdoc.models.LoadDocContentsResponse;
 import fr.entoria.ged.bdoc.models.QueryForDocumentsResponse;
 import fr.entoria.ged.bdoc.requests.GedBdocApiRequest;
+import fr.entoria.ged.bdoc.service.IAddDocIndexes;
+import fr.entoria.ged.bdoc.service.IDeleteDocIndexes;
 import fr.entoria.ged.bdoc.service.IIsDocumentExist;
 import fr.entoria.ged.bdoc.service.ILoadDocContents;
 import fr.entoria.ged.bdoc.service.IQueryForDocuments;
@@ -32,6 +37,12 @@ public class BdocBusiness implements IBdocBusiness {
 
     @Autowired
     ICaching caching;
+
+    @Autowired
+    IAddDocIndexes addDocIndexesFunction;
+
+    @Autowired
+    IDeleteDocIndexes deleteDocIndexesFunction;
 
     @Autowired
     IIsDocumentExist isDocumentExistFunction;
@@ -78,5 +89,27 @@ public class BdocBusiness implements IBdocBusiness {
 	Token apiToken = retrieveToken(request);
 
 	return isDocumentExistFunction.execute(request, apiToken, bdocEndpointUrl);
+    }
+
+    @Override
+    public AddDocIndexesResponse addDocIndexes(GedBdocApiRequest request)
+		throws SOAPException, InvalidGedBdocApiArgumentsException, Exception {
+	logger.info(LOGGER_HEADER + "call method addDocIndexes (AddDocIndexesResponse)");
+
+	addDocIndexesFunction.validate(request);
+
+	Token apiToken = retrieveToken(request);
+	return addDocIndexesFunction.execute(request, apiToken, bdocEndpointUrl);
+    }
+
+    @Override
+    public DeleteDocIndexesResponse deleteDocIndexes(GedBdocApiRequest request)
+		throws SOAPException, InvalidGedBdocApiArgumentsException, Exception {
+	logger.info(LOGGER_HEADER + "call method deleteDocIndexes (DeleteDocIndexesResponse)");
+
+	deleteDocIndexesFunction.validate(request);
+
+	Token apiToken = retrieveToken(request);
+	return deleteDocIndexesFunction.execute(request, apiToken, bdocEndpointUrl);
     }
 }

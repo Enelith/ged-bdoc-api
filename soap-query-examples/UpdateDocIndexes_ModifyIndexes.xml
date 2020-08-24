@@ -1,44 +1,43 @@
-<soapenv:Envelope xmlns:cyp="http://asg.com/cypress_wcfsvc_v73/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<soapenv:Header/>
-	<soapenv:Body>
-		<cyp:UpdateDocIndexes>
-			<!--Optional:-->
-			<cyp:UserCredential>
-				<cyp:CredentialType>UserIdPassword</cyp:CredentialType>
-				<cyp:DomainName>molitor</cyp:DomainName>
-				<cyp:UserName>srv_bdoc</cyp:UserName>
-				<cyp:Password>28awuS+eBrEm</cyp:Password>
-				<cyp:CypWsUserId/>
-				<cyp:CredentialData/>
-			</cyp:UserCredential>
-			<!--Optional:-->
-			<cyp:ReqUpdtDocInx>
-				<cyp:TaskId>ModifyIndexes</cyp:TaskId>
-				<!--Optional:-->
-				<cyp:UpdtTask xsi:type="cyp:CwsMdfyInxTask">
-					<cyp:UseTempToCvtVals>false</cyp:UseTempToCvtVals>
-					<!--IS A CwsAddDocInxActn :-->
-					<cyp:MdfyInxActns xsi:type="cyp:CwsMdfyDocInxActns">
-						<cyp:MdfyInxActn xsi:type="cyp:CwsMdfyInxActn">
-							<cyp:UpdtScope>DocLevelUpdate
-							</cyp:UpdtScope>
-							<cyp:TargetDocs>
-								<cyp:DdocIds>21562</cyp:DdocIds>
-							</cyp:TargetDocs>
-							<cyp:MdfyInxVals xsi:type="cyp:CwsMdfyInxVals">
-								<cyp:MdfyInxVal xsi:type="cyp:CwsMdfyInxVal">
-									<cyp:InxId>1026</cyp:InxId>
-									<cyp:CurVal xsi:type="xsd:string">OUT</cyp:CurVal>
-									<cyp:NewVal xsi:type="xsd:string">TOTO</cyp:NewVal>
-									<cyp:Template/>
-								</cyp:MdfyInxVal>
-							</cyp:MdfyInxVals>
-						</cyp:MdfyInxActn>
-					</cyp:MdfyInxActns>
-				</cyp:UpdtTask>
-			</cyp:ReqUpdtDocInx>
-			<!--Optional:-->
-			<cyp:ReqOptUpdtDocInx/>
-		</cyp:UpdateDocIndexes>
-	</soapenv:Body>
+<!--  Ne fonctionne pas  -->
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                  xmlns:cyp="http://asg.com/cypress_wcfsvc_v73/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Header/>
+  <soapenv:Body>
+     <cyp:ModifyDocIndexes>
+		<!--Optional:-->
+		<cyp:UserCredential>
+			<cyp:CredentialType>UserIdPassword</cyp:CredentialType>
+			<cyp:DomainName>molitor</cyp:DomainName>
+			<cyp:UserName>srv_bdoc</cyp:UserName>
+			<cyp:Password>28awuS+eBrEm</cyp:Password>
+			<cyp:CypWsUserId/>
+			<cyp:CredentialData/>
+		</cyp:UserCredential>
+        
+        <cyp:ReqModifyDocInx>
+         <cyp:ModifyActnList xsi:type="cyp:CwsModifyIndexActn">
+          <cyp:CwsModifyIndexActn>
+          <cyp:UseTempToCvtVals>false</cyp:UseTempToCvtVals>
+          <cyp:UpdtScope>DocLevelUpdate</cyp:UpdtScope>
+          <cyp:InxList>
+            <cyp:CwsMdfyInxVal>
+              <cyp:InxId>1026</cyp:InxId>
+              <cyp:CurVal xsi:type="xsd:string">OUT</cyp:CurVal>
+              <cyp:NewVal xsi:type="xsd:string">TOTO</cyp:NewVal>
+            </cyp:CwsMdfyInxVal>
+         </cyp:InxList>
+         <cyp:TgtDocs>
+             <cyp:DdocIds>
+             <cyp:unsignedInt>23680</cyp:unsignedInt>
+             </cyp:DdocIds>
+         </cyp:TgtDocs>
+         </cyp:CwsModifyIndexActn>
+         
+        </cyp:ModifyActnList>
+       </cyp:ReqModifyDocInx>
+      </cyp:ModifyDocIndexes>
+  </soapenv:Body>
 </soapenv:Envelope>

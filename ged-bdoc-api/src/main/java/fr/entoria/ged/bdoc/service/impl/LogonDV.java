@@ -10,7 +10,7 @@ import fr.entoria.ged.bdoc.requests.GedBdocApiRequest;
 import fr.entoria.ged.bdoc.service.ILogonDV;
 
 @Component
-public class LogonDV extends BdocFunctions implements ILogonDV {
+public class LogonDV extends AbstractBdocFunctions implements ILogonDV {
     private static final String LOGGER_HEADER = "[" + LogonDV.class.getName() + "] ";
     private static final Logger logger = (Logger) LoggerFactory.getLogger(LogonDV.class);
 

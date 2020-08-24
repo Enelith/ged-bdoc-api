@@ -25,7 +25,7 @@ import fr.entoria.ged.bdoc.tools.SoapClient;
 @Component
 @RequestScope
 @EnableRetry
-public class IsDocumentExist extends BdocFunctions implements IIsDocumentExist {
+public class IsDocumentExist extends AbstractBdocFunctions implements IIsDocumentExist {
     private static final String LOGGER_HEADER = "[" + IsDocumentExist.class.getName() + "] ";
     private static final Logger logger = (Logger) LoggerFactory.getLogger(IsDocumentExist.class);
 

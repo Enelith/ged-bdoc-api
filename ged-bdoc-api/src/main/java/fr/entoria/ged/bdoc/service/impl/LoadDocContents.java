@@ -27,7 +27,7 @@ import fr.entoria.ged.bdoc.tools.SoapClient;
 @Component
 @RequestScope
 @EnableRetry
-public class LoadDocContents extends BdocFunctions implements ILoadDocContents {
+public class LoadDocContents extends AbstractBdocFunctions implements ILoadDocContents {
     private static final String LOGGER_HEADER = "[" + LoadDocContents.class.getName() + "] ";
     private static final Logger logger = (Logger) LoggerFactory.getLogger(LoadDocContents.class);
 

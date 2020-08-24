@@ -27,7 +27,7 @@ import fr.entoria.ged.bdoc.tools.SoapClient;
 @Component
 @RequestScope
 @EnableRetry
-public class QueryForDocuments extends BdocFunctions implements IQueryForDocuments {
+public class QueryForDocuments extends AbstractBdocFunctions implements IQueryForDocuments {
     private static final String LOGGER_HEADER = "[" + QueryForDocuments.class.getName() + "] ";
     private static final Logger logger = (Logger) LoggerFactory.getLogger(QueryForDocuments.class);
 
