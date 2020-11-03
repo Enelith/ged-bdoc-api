@@ -31,7 +31,8 @@ public class Caching implements ICaching {
 
     @Override
     @Cacheable(
-		cacheNames = "${spring.cache.cacheName.token}",
+		//cacheNames = "${spring.cache.cacheName.token}",
+		cacheNames = "tokenCache",
 		key = "#request.requestId",
 		condition = "#request.requestId != null && #request.requestId > 0",
 		sync = true)
@@ -41,7 +42,8 @@ public class Caching implements ICaching {
 
     @Override
     @CachePut(
-		cacheNames = "${spring.cache.cacheName.token}",
+		//cacheNames = "${spring.cache.cacheName.token}",
+		cacheNames = "tokenCache",
 		key = "#request.requestId",
 		condition = "#request.requestId != null && #request.requestId > 0",
 		unless = "#result == null")
@@ -52,16 +54,13 @@ public class Caching implements ICaching {
     }
 
     private Token retrieveToken(GedBdocApiRequest request, String bdocEndpointUrl) throws SOAPException, Exception {
-	logger.info(LOGGER_HEADER + "CACHING PROCESS > retrieveToken (LogonDVResponse) : requestId = "
-		    + request.getRequestId());
-
 	Token token = null;
 
 	if (request.getRequestId() != null
 		    && request.getRequestId() > 0) {
-	    logger.info(LOGGER_HEADER + "Start Caching Operation for Token");
-
 	    SoapClient soapClient = new SoapClient(bdocEndpointUrl);
+
+	    logger.info(LOGGER_HEADER + "GENERATION TOKEN");
 
 	    SOAPMessage soapRequest = logonDVFunction.generateSoapRequest(request, soapClient.getSoapRequest());
 	    try {
@@ -73,7 +72,7 @@ public class Caching implements ICaching {
 				logonDVResponse.getUserID(),
 				LocalDateTime.now());
 
-		    logger.info(LOGGER_HEADER + "Token UserID found : " + token.getValue());
+		    logger.info(LOGGER_HEADER + "Token UserID generated : " + token.getValue());
 		}
 	    } catch (SOAPException e) {
 		logger.error(LOGGER_HEADER + "(SOAPException) Error occurred while sending SOAP Request to Server : "
@@ -88,13 +87,18 @@ public class Caching implements ICaching {
 	    }
 	}
 
+	if (token == null) {
+	    logger.error(LOGGER_HEADER + "ANOMALY DETECTED : TOKEN COULD NOT BE GENERATED");
+	}
+
 	return token;
     }
 
     @Override
     @Scheduled(cron = "${spring.cache.cacheName.token.evict.cron}")
-    @CacheEvict(cacheNames = "${spring.cache.cacheName.token}", allEntries = true)
+    //@CacheEvict(cacheNames = "${spring.cache.cacheName.token}", allEntries = true)
+    @CacheEvict(cacheNames = "tokenCache", allEntries = true)
     public void emptyCache() {
-
+	logger.info(LOGGER_HEADER + "!!! SPRING CACHE MANAGER (CacheEvict) : EMPTY CACHE FOR ALL ENTRIES !!!");
     }
 }

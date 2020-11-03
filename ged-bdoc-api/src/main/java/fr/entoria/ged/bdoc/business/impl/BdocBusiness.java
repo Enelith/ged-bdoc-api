@@ -11,15 +11,10 @@ import org.springframework.stereotype.Component;
 import fr.entoria.ged.bdoc.api.Token;
 import fr.entoria.ged.bdoc.business.IBdocBusiness;
 import fr.entoria.ged.bdoc.business.ICaching;
-import fr.entoria.ged.bdoc.exceptions.InvalidGedBdocApiArgumentsException;
-import fr.entoria.ged.bdoc.models.AddDocIndexesResponse;
-import fr.entoria.ged.bdoc.models.DeleteDocIndexesResponse;
 import fr.entoria.ged.bdoc.models.IsDocumentExistResponse;
 import fr.entoria.ged.bdoc.models.LoadDocContentsResponse;
 import fr.entoria.ged.bdoc.models.QueryForDocumentsResponse;
 import fr.entoria.ged.bdoc.requests.GedBdocApiRequest;
-import fr.entoria.ged.bdoc.service.IAddDocIndexes;
-import fr.entoria.ged.bdoc.service.IDeleteDocIndexes;
 import fr.entoria.ged.bdoc.service.IIsDocumentExist;
 import fr.entoria.ged.bdoc.service.ILoadDocContents;
 import fr.entoria.ged.bdoc.service.IQueryForDocuments;
@@ -29,20 +24,15 @@ public class BdocBusiness implements IBdocBusiness {
     private static final String LOGGER_HEADER = "[" + BdocBusiness.class.getName() + "] ";
     private static final Logger logger = (Logger) LoggerFactory.getLogger(BdocBusiness.class);
 
-    @Value("${token.ttl.mins}")
-    private Long ttl;
+    /*
+     * @Value("${token.ttl.mins}") private Long ttl;
+     */
 
     @Value("${bdoc.connector.soap.endpoint.url}")
     private String bdocEndpointUrl;
 
     @Autowired
     ICaching caching;
-
-    @Autowired
-    IAddDocIndexes addDocIndexesFunction;
-
-    @Autowired
-    IDeleteDocIndexes deleteDocIndexesFunction;
 
     @Autowired
     IIsDocumentExist isDocumentExistFunction;
@@ -55,11 +45,11 @@ public class BdocBusiness implements IBdocBusiness {
 
     private Token retrieveToken(GedBdocApiRequest request) throws SOAPException, Exception {
 	Token apiToken = caching.getToken(request, bdocEndpointUrl);
-	if (apiToken == null
-		    || !apiToken.isValid(ttl)) {
-	    apiToken = caching.refreshToken(request, bdocEndpointUrl);
+	if (apiToken == null) {
+	    // || !apiToken.isValid(ttl)) {
+	    logger.warn(LOGGER_HEADER + "Token null");
 	} else {
-	    logger.info(LOGGER_HEADER + "Will use Token UserID : " + apiToken.getValue());
+	    logger.info(LOGGER_HEADER + "---> Will use Token UserID : " + apiToken.getValue());
 	}
 	return apiToken;
     }
@@ -89,27 +79,5 @@ public class BdocBusiness implements IBdocBusiness {
 	Token apiToken = retrieveToken(request);
 
 	return isDocumentExistFunction.execute(request, apiToken, bdocEndpointUrl);
-    }
-
-    @Override
-    public AddDocIndexesResponse addDocIndexes(GedBdocApiRequest request)
-		throws SOAPException, InvalidGedBdocApiArgumentsException, Exception {
-	logger.info(LOGGER_HEADER + "call method addDocIndexes (AddDocIndexesResponse)");
-
-	addDocIndexesFunction.validate(request);
-
-	Token apiToken = retrieveToken(request);
-	return addDocIndexesFunction.execute(request, apiToken, bdocEndpointUrl);
-    }
-
-    @Override
-    public DeleteDocIndexesResponse deleteDocIndexes(GedBdocApiRequest request)
-		throws SOAPException, InvalidGedBdocApiArgumentsException, Exception {
-	logger.info(LOGGER_HEADER + "call method deleteDocIndexes (DeleteDocIndexesResponse)");
-
-	deleteDocIndexesFunction.validate(request);
-
-	Token apiToken = retrieveToken(request);
-	return deleteDocIndexesFunction.execute(request, apiToken, bdocEndpointUrl);
     }
 }

@@ -8,11 +8,9 @@ public class ItemQuery {
     private String operande;
 
     public ItemQuery() {
-	super();
     }
 
     public ItemQuery(String itemKey, String itemValue, String operande) {
-	super();
 	this.itemKey = itemKey;
 	this.itemValue = itemValue;
 	this.operande = operande;

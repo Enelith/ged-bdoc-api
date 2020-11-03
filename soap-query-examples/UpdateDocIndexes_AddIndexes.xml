@@ -1,54 +1,43 @@
-<soapenv:Envelope
-	xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-	xmlns:cyp="http://asg.com/cypress_wcfsvc_v73/"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<soapenv:Header />
+<soapenv:Envelope xmlns:cyp="http://asg.com/cypress_wcfsvc_v73/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soapenv:Header/>
 	<soapenv:Body>
-		<cyp:AddDocIndexes>
-			<!--Optional: -->
+		<cyp:UpdateDocIndexes>
+			<!--Optional:-->
 			<cyp:UserCredential>
 				<cyp:CredentialType>UserIdPassword</cyp:CredentialType>
 				<cyp:DomainName>molitor</cyp:DomainName>
 				<cyp:UserName>srv_bdoc</cyp:UserName>
 				<cyp:Password>28awuS+eBrEm</cyp:Password>
-				<cyp:CypWsUserId />
-				<cyp:CredentialData />
+				<cyp:CypWsUserId/>
+				<cyp:CredentialData/>
 			</cyp:UserCredential>
-			<!--Optional: -->
-			<cyp:ReqAddDocInx>
-				<cyp:AddActnList xsi:type="cyp:CwsAddIndexActn">
-					<!--Optional: -->
-					<cyp:CwsAddIndexActn>
-						<cyp:UseTempToCvtVals>false</cyp:UseTempToCvtVals>
-						<cyp:UpdtScope>DocLevelUpdate</cyp:UpdtScope>
-						<cyp:InxList>
-							<cyp:CwsAddInxVal>
-								<cyp:InxId>1026</cyp:InxId>
-								<cyp:InxVal xsi:type="xsd:string">TOTO</cyp:InxVal>
-							</cyp:CwsAddInxVal>
-						</cyp:InxList>
-						<cyp:TgtDocs>
-							<cyp:DdocIds>
-								<cyp:unsignedInt>23680</cyp:unsignedInt>
-							</cyp:DdocIds>
-						</cyp:TgtDocs>
-					</cyp:CwsAddIndexActn>
-				</cyp:AddActnList>
-			</cyp:ReqAddDocInx>
-		</cyp:AddDocIndexes>
+			<!--Optional:-->
+			<cyp:ReqUpdtDocInx>
+				<cyp:TaskId>AddIndexes</cyp:TaskId>
+				<!--Optional:-->
+				<cyp:UpdtTask xsi:type="cyp:CwsAddInxTask">
+					<cyp:UseTempToCvtVals>false</cyp:UseTempToCvtVals>
+					<!--IS A CwsAddDocInxActn :-->
+					<cyp:AddInxActns xsi:type="cyp:CwsAddDocInxActns">
+						<cyp:AddInxActn xsi:type="cyp:CwsAddInxActn">
+							<cyp:UpdtScope>DocLevelUpdate
+							</cyp:UpdtScope>
+							<cyp:TargetDocs>
+								<cyp:DdocIds>21562</cyp:DdocIds>
+							</cyp:TargetDocs>
+							<cyp:AddInxVals xsi:type="cyp:CwsAddInxVals">
+								<cyp:AddInxVal xsi:type="cyp:CwsAddInxVal">
+									<cyp:InxId>1026</cyp:InxId>
+									<cyp:InxVal xsi:type="xsd:string">TOTO</cyp:InxVal>
+									<cyp:Template/>
+								</cyp:AddInxVal>
+							</cyp:AddInxVals>
+						</cyp:AddInxActn>
+					</cyp:AddInxActns>
+				</cyp:UpdtTask>
+			</cyp:ReqUpdtDocInx>
+			<!--Optional:-->
+			<cyp:ReqOptUpdtDocInx/>
+		</cyp:UpdateDocIndexes>
 	</soapenv:Body>
 </soapenv:Envelope>
-
-<!-- RESULTAT -->
-<!-- 
-<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-   <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-      <AddDocIndexesResponse xmlns="http://asg.com/cypress_wcfsvc_v73/">
-         <AddDocIndexesResult>
-            <status>true</status>
-         </AddDocIndexesResult>
-      </AddDocIndexesResponse>
-   </s:Body>
-</s:Envelope>
- -->

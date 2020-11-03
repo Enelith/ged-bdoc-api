@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	targetNamespace="http://wsimpl.ged.business.bdocinteractive.bdoc.com"
+	xmlns:apachesoap="http://xml.apache.org/xml-soap"
+	xmlns:impl="http://wsimpl.ged.business.bdocinteractive.bdoc.com"
+	xmlns:intf="http://wsimpl.ged.business.bdocinteractive.bdoc.com"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<!--WSDL created by Apache Axis version: 1.4 Built on Apr 22, 2006 (06:55:48 
+		PDT) -->
+	<wsdl:types>
+		<schema elementFormDefault="qualified"
+			targetNamespace="http://wsimpl.ged.business.bdocinteractive.bdoc.com"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://xml.apache.org/xml-soap" />
+			<element name="searchDocuments">
+				<complexType>
+					<sequence>
+						<element name="queryName" type="xsd:string" />
+						<element name="params" type="apachesoap:Map" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="searchDocumentsResponse">
+				<complexType>
+					<sequence>
+						<element maxOccurs="unbounded"
+							name="searchDocumentsReturn" type="impl:GedDocument" />
+					</sequence>
+				</complexType>
+			</element>
+			<complexType name="GedDocument">
+				<sequence>
+					<element name="author" nillable="true" type="xsd:string" />
+					<element name="content" nillable="true"
+						type="xsd:base64Binary" />
+					<element name="creationDate" nillable="true"
+						type="xsd:dateTime" />
+					<element name="mimeType" nillable="true" type="xsd:string" />
+					<element name="id" nillable="true" type="xsd:string" />
+					<element name="metainfo" nillable="true"
+						type="apachesoap:Map" />
+					<element name="title" nillable="true" type="xsd:string" />
+				</sequence>
+			</complexType>
+		</schema>
+		<schema elementFormDefault="qualified"
+			targetNamespace="http://xml.apache.org/xml-soap"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+			<import
+				namespace="http://wsimpl.ged.business.bdocinteractive.bdoc.com" />
+			<complexType name="mapItem">
+				<sequence>
+					<element name="key" nillable="true" type="xsd:anyType" />
+					<element name="value" nillable="true" type="xsd:anyType" />
+				</sequence>
+			</complexType>
+			<complexType name="Map">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="item"
+						type="apachesoap:mapItem" />
+				</sequence>
+			</complexType>
+		</schema>
+	</wsdl:types>
+
+	<wsdl:message name="searchDocumentsResponse">
+		<wsdl:part element="impl:searchDocumentsResponse" name="parameters" />
+	</wsdl:message>
+	
+	<wsdl:message name="searchDocumentsRequest">
+		<wsdl:part element="impl:searchDocuments" name="parameters" />
+	</wsdl:message>
+
+	<wsdl:portType name="WSGedDocumentDAOImpl">
+		<wsdl:operation name="searchDocuments">
+			<wsdl:input message="impl:searchDocumentsRequest"
+				name="searchDocumentsRequest" />
+			<wsdl:output message="impl:searchDocumentsResponse"
+				name="searchDocumentsResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="WSGedDocumentDAOImplSoapBinding"
+		type="impl:WSGedDocumentDAOImpl">
+		<wsdlsoap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="searchDocuments">
+			<wsdlsoap:operation soapAction="" />
+			<wsdl:input name="searchDocumentsRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="searchDocumentsResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="WSGedDocumentDAOImplService">
+		<wsdl:port binding="impl:WSGedDocumentDAOImplSoapBinding"
+			name="WSGedDocumentDAOImpl">
+			<wsdlsoap:address
+				location="http://localhost:8089/ged-bdoc-api/ws" />
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

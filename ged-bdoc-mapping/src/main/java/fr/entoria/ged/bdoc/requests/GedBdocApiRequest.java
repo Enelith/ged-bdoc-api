@@ -1,9 +1,9 @@
 package fr.entoria.ged.bdoc.requests;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import fr.entoria.ged.bdoc.models.query.ActionOnIndexes;
+import fr.entoria.ged.bdoc.enums.BdocQueryOptions;
 
 public class GedBdocApiRequest {
     private Integer requestId;
@@ -15,23 +15,26 @@ public class GedBdocApiRequest {
     private String password;
 
     private String query;
-
-    private List<ActionOnIndexes> actionsOnIndexes = new ArrayList<>();
+    
+    private Map<BdocQueryOptions, Object> options = new ConcurrentHashMap<>();
 
     public GedBdocApiRequest() {
 	super();
 	// TODO Auto-generated constructor stub
     }
 
-    public GedBdocApiRequest(Integer requestId, String domain, String username, String password, String query,
-		List<ActionOnIndexes> actionsOnIndexes) {
+    public GedBdocApiRequest(Integer requestId, String domain, String username, String password, String query) {
 	super();
 	this.requestId = requestId;
 	this.domain = domain;
 	this.username = username;
 	this.password = password;
 	this.query = query;
-	this.actionsOnIndexes = actionsOnIndexes;
+    }
+
+    public GedBdocApiRequest(Integer requestId, String domain, String username, String password, String query, ConcurrentHashMap<BdocQueryOptions, Object> options) {
+	this(requestId, domain, username, password, query);
+	this.setOptions(options);
     }
 
     public Integer getRequestId() {
@@ -74,11 +77,11 @@ public class GedBdocApiRequest {
 	this.query = query;
     }
 
-    public List<ActionOnIndexes> getActionsOnIndexes() {
-	return actionsOnIndexes;
+    public Map<BdocQueryOptions, Object> getOptions() {
+	return options;
     }
 
-    public void setActionsOnIndexes(List<ActionOnIndexes> actionsOnIndexes) {
-	this.actionsOnIndexes = actionsOnIndexes;
+    public void setOptions(Map<BdocQueryOptions, Object> options) {
+	this.options = options;
     }
 }

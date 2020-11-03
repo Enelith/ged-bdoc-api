@@ -48,7 +48,7 @@ public class SoapClient {
     private URL soapEndpointUrl;
 
     public SoapClient(String bdocEndpointUrl) {
-	logger.info(LOGGER_HEADER + "Initialize SoapClient");
+	logger.debug(LOGGER_HEADER + "Initialize SoapClient");
 
 	try {
 	    soapConnectionFactory = SOAPConnectionFactory.newInstance();
@@ -75,7 +75,7 @@ public class SoapClient {
 
     public <T> T soapConnectionCall(SOAPMessage customSoapRequest, Class<T> responseClass)
 		throws SOAPException, Exception {
-	logger.info(LOGGER_HEADER + "call soapConnectionCall");
+	logger.debug(LOGGER_HEADER + "call soapConnectionCall");
 
 	displayMessage(customSoapRequest, "Request", true);
 
@@ -88,11 +88,12 @@ public class SoapClient {
     }
 
     public void close() {
-	logger.info(LOGGER_HEADER + "call close");
+	logger.debug(LOGGER_HEADER + "call close");
 
 	try {
 	    if (soapConnection != null) {
 		soapConnection.close();
+		logger.info(LOGGER_HEADER + "SOAPConnection closed");
 	    }
 	} catch (UnsupportedOperationException e) {
 	    logger.error("(UnsupportedOperationException) Error while terminating SOAPConnection : " + e.getMessage());
@@ -124,7 +125,7 @@ public class SoapClient {
     }
 
     private Unmarshaller getUnmarshaller(Class<?> responseClass) throws JAXBException {
-	logger.info(LOGGER_HEADER + "call getUnmarshaller for class : " + responseClass.getClass().getSimpleName());
+	logger.debug(LOGGER_HEADER + "call getUnmarshaller for class : " + responseClass.getClass().getSimpleName());
 
 	Unmarshaller u = null;
 	if (unmarshallers.containsKey(responseClass)) {
@@ -138,7 +139,7 @@ public class SoapClient {
 
     @SuppressWarnings("unchecked")
     private <T> T result(Class<T> responseClass) throws Exception {
-	logger.info(LOGGER_HEADER + "call soapConnectionCall > result");
+	logger.debug(LOGGER_HEADER + "call soapConnectionCall > result");
 
 	SAXParserFactory spf = SAXParserFactory.newInstance();
 	SAXParser sp = spf.newSAXParser();

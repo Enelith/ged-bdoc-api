@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+      
+    <!--
+
+Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.3.0 
+Voir <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
+Généré le : 2020.10.26 à 09:55:22 AM CET 
+
+  -->
+      
+    <bindings xmlns:tns="http://ged.business.bdocinteractive.bdoc.com" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="fr.entoria.ged.bdoc.soap.models.getDocumentById"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="tns:getDocumentById">
+                  
+            <class ref="fr.entoria.ged.bdoc.soap.models.getDocumentById.GetDocumentById"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getDocumentByIdResponse">
+                  
+            <class ref="fr.entoria.ged.bdoc.soap.models.getDocumentById.GetDocumentByIdResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:GedDocument">
+                  
+            <class ref="fr.entoria.ged.bdoc.soap.models.getDocumentById.GedDocument"/>
+                
+        </bindings>
+          
+    </bindings>
+      
+    <bindings xmlns:tns="http://xml.apache.org/xml-soap" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="fr.entoria.ged.bdoc.soap.models.getDocumentById"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="~tns:mapItem">
+                  
+            <class ref="fr.entoria.ged.bdoc.soap.models.getDocumentById.MapItem"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:Map">
+                  
+            <class ref="fr.entoria.ged.bdoc.soap.models.getDocumentById.Map"/>
+                
+        </bindings>
+          
+    </bindings>
+    
+</bindings>

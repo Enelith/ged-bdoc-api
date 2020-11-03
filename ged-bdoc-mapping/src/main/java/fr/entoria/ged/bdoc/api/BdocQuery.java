@@ -29,7 +29,10 @@ public class BdocQuery {
 				    || GenericValidator.isDate(item.getItemValue(), DATE_PATTERN_HHMM, true))) {
 		itemValue += "tstamp(" + item.getItemValue().replaceAll(DATE_SEPARATOR, DATE_BDOC_TSTAMP_SEPARATOR)
 			     + ")";
-	    } else {
+	    } else if (BdocIndexes._DOCUMENT_ID.value().equals(item.getItemKey())) {
+		itemValue += item.getItemValue();
+	}
+	    else {
 		itemValue += BdocQuery.formatValue(item.getItemValue());
 	    }
 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	xmlns="http://wsimpl.ged.business.bdocinteractive.bdoc.com"
+	targetNamespace="http://wsimpl.ged.business.bdocinteractive.bdoc.com"
+	elementFormDefault="qualified"
+	xmlns:tns="http://wsimpl.ged.business.bdocinteractive.bdoc.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:apachesoap="http://xml.apache.org/xml-soap">
+
+	<xsd:import namespace="http://xml.apache.org/xml-soap"
+		schemaLocation="map.xsd"></xsd:import>
+
+	<xsd:element name="searchDocuments">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="queryName" type="xsd:string" />
+				<xsd:element name="params" type="apachesoap:Map" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="searchDocumentsResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="unbounded"
+					name="searchDocumentsReturn" type="tns:GedDocument" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="GedDocument">
+		<xsd:sequence>
+			<xsd:element name="author" nillable="true"
+				type="xsd:string" />
+			<xsd:element name="content" nillable="true"
+				type="xsd:base64Binary" />
+			<xsd:element name="creationDate" nillable="true"
+				type="xsd:dateTime" />
+			<xsd:element name="mimeType" nillable="true"
+				type="xsd:string" />
+			<xsd:element name="id" nillable="true" type="xsd:string" />
+			<xsd:element name="metainfo" nillable="true"
+				type="apachesoap:Map" />
+			<xsd:element name="title" nillable="true"
+				type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

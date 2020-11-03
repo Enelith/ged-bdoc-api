@@ -45,7 +45,7 @@ public class Token implements Serializable {
 
     @Override
     public String toString() {
-	return "Token{" + "id='" + id + '\'' + ", value='" + value + "\'}";
+	return "Token{" + "id='" + id + '\'' + ", value='" + value + "\', createDate='" + createDate + "\'}";
     }
 
     public boolean isValid(Long ttl) {

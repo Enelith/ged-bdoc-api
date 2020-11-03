@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	targetNamespace="http://ged.business.bdocinteractive.bdoc.com"
+	xmlns:apachesoap="http://xml.apache.org/xml-soap"
+	xmlns:impl="http://ged.business.bdocinteractive.bdoc.com"
+	xmlns:intf="http://ged.business.bdocinteractive.bdoc.com"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<!--WSDL created by Apache Axis version: 1.4 Built on Apr 22, 2006 (06:55:48 
+		PDT) -->
+	<wsdl:types>
+		<schema elementFormDefault="qualified"
+			targetNamespace="http://ged.business.bdocinteractive.bdoc.com"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://xml.apache.org/xml-soap" />
+			<element name="getDocumentById">
+				<complexType>
+					<sequence>
+						<element name="id" type="xsd:string" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getDocumentByIdResponse">
+				<complexType>
+					<sequence>
+						<element name="getDocumentByIdReturn"
+							type="impl:GedDocument" />
+					</sequence>
+				</complexType>
+			</element>
+			<complexType name="GedDocument">
+				<sequence>
+					<element name="author" nillable="true" type="xsd:string" />
+					<element name="content" nillable="true"
+						type="xsd:base64Binary" />
+					<element name="creationDate" nillable="true"
+						type="xsd:dateTime" />
+					<element name="id" nillable="true" type="xsd:string" />
+					<element name="metainfo" nillable="true"
+						type="apachesoap:Map" />
+					<element name="title" nillable="true" type="xsd:string" />
+					<element name="mimeType" nillable="true" type="xsd:string" />
+				</sequence>
+			</complexType>
+		</schema>
+		<schema elementFormDefault="qualified"
+			targetNamespace="http://xml.apache.org/xml-soap"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+			<import
+				namespace="http://ged.business.bdocinteractive.bdoc.com" />
+			<complexType name="mapItem">
+				<sequence>
+					<element name="key" nillable="true" type="xsd:anyType" />
+					<element name="value" nillable="true" type="xsd:anyType" />
+				</sequence>
+			</complexType>
+			<complexType name="Map">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="item"
+						type="apachesoap:mapItem" />
+				</sequence>
+			</complexType>
+		</schema>
+	</wsdl:types>
+
+	<wsdl:message name="getDocumentByIdRequest">
+		<wsdl:part element="impl:getDocumentById" name="parameters" />
+	</wsdl:message>
+
+	<wsdl:message name="getDocumentByIdResponse">
+		<wsdl:part element="impl:getDocumentByIdResponse"
+			name="parameters" />
+	</wsdl:message>
+
+	<wsdl:portType name="GEDDaoImpl">
+		<wsdl:operation name="getDocumentById">
+			<wsdl:input message="impl:getDocumentByIdRequest"
+				name="getDocumentByIdRequest" />
+			<wsdl:output message="impl:getDocumentByIdResponse"
+				name="getDocumentByIdResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="GEDDaoImplSoapBinding"
+		type="impl:GEDDaoImpl">
+		<wsdlsoap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getDocumentById">
+			<wsdlsoap:operation soapAction="" />
+			<wsdl:input name="getDocumentByIdRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getDocumentByIdResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="GEDDaoImplService">
+		<wsdl:port binding="impl:GEDDaoImplSoapBinding"
+			name="GEDDaoImpl">
+			<wsdlsoap:address
+				location="http://devbdoc02:8080/bdoci-ws-samples-6.1/services/getDoc" />
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

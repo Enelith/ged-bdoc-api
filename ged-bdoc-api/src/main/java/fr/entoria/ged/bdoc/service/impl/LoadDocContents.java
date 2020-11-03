@@ -19,6 +19,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import fr.entoria.ged.bdoc.api.BdocConstants;
 import fr.entoria.ged.bdoc.api.Token;
 import fr.entoria.ged.bdoc.business.ICaching;
+import fr.entoria.ged.bdoc.enums.BdocQueryOptions;
 import fr.entoria.ged.bdoc.models.LoadDocContentsResponse;
 import fr.entoria.ged.bdoc.requests.GedBdocApiRequest;
 import fr.entoria.ged.bdoc.service.ILoadDocContents;
@@ -27,7 +28,7 @@ import fr.entoria.ged.bdoc.tools.SoapClient;
 @Component
 @RequestScope
 @EnableRetry
-public class LoadDocContents extends AbstractBdocFunctions implements ILoadDocContents {
+public class LoadDocContents extends BdocFunctions implements ILoadDocContents {
     private static final String LOGGER_HEADER = "[" + LoadDocContents.class.getName() + "] ";
     private static final Logger logger = (Logger) LoggerFactory.getLogger(LoadDocContents.class);
 
@@ -162,8 +163,12 @@ public class LoadDocContents extends AbstractBdocFunctions implements ILoadDocCo
 
 	SOAPElement options = _reqOptDocBlock.addChildElement("Options", request_prefix);
 
+	// <cyp:CwsReqOptDocItem>
+	// ---<cyp:Id>OutputFormat</cyp:Id>
+	// ---<cyp:Val xs:xmlns="http://www.w3.org/2001/XMLSchema" xsi:type="xs:int"
+	// xsi:xmlns="http://www.w3.org/2001/XMLSchema-instance">3</cyp:Val>
+	// </cyp:CwsReqOptDocItem>
 	SOAPElement cwsReqOptDocItem = options.addChildElement("CwsReqOptDocItem", request_prefix);
-
 	SOAPElement cwsReqOptDocItem_Option = cwsReqOptDocItem.addChildElement("Id", request_prefix);
 	cwsReqOptDocItem_Option.addTextNode("OutputFormat");
 
@@ -175,17 +180,24 @@ public class LoadDocContents extends AbstractBdocFunctions implements ILoadDocCo
 	cwsReqOptDocItem_Option.addAttribute(new QName("", "type", "xsi"), "xs:int");
 	cwsReqOptDocItem_Option.addTextNode(BdocConstants.BDOC_OUTPUTFORMAT_PDF);
 
-	cwsReqOptDocItem = options.addChildElement("CwsReqOptDocItem", request_prefix);
+	// <cyp:CwsReqOptDocItem>
+	// ---<cyp:Id>Dialect</cyp:Id>
+	// ---<cyp:Val xs:xmlns="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string"
+	// xsi:xmlns="http://www.w3.org/2001/XMLSchema-instance">raster(never)</cyp:Val>
+	// </cyp:CwsReqOptDocItem>
+	if (apiRequest.getOptions().containsKey(BdocQueryOptions.USE_RASTER_NEVER)
+		    && Boolean.valueOf(apiRequest.getOptions().get(BdocQueryOptions.USE_RASTER_NEVER).toString()) ) {
+	    cwsReqOptDocItem = options.addChildElement("CwsReqOptDocItem", request_prefix);
+	    cwsReqOptDocItem_Option = cwsReqOptDocItem.addChildElement("Id", request_prefix);
+	    cwsReqOptDocItem_Option.addTextNode("Dialect");
 
-	cwsReqOptDocItem_Option = cwsReqOptDocItem.addChildElement("Id", request_prefix);
-	cwsReqOptDocItem_Option.addTextNode("Dialect");
-
-	cwsReqOptDocItem_Option = cwsReqOptDocItem.addChildElement("Val", request_prefix);
-	cwsReqOptDocItem_Option.addAttribute(new QName("http://www.w3.org/2001/XMLSchema", "xmlns", "xs"),
-		    "http://www.w3.org/2001/XMLSchema");
-	cwsReqOptDocItem_Option.addAttribute(new QName("http://www.w3.org/2001/XMLSchema-instance", "xmlns", "xsi"),
-		    "http://www.w3.org/2001/XMLSchema-instance");
-	cwsReqOptDocItem_Option.addAttribute(new QName("", "type", "xsi"), "xs:string");
-	cwsReqOptDocItem_Option.addTextNode(BdocConstants.DIALECT_RASTER_NEVER);
+	    cwsReqOptDocItem_Option = cwsReqOptDocItem.addChildElement("Val", request_prefix);
+	    cwsReqOptDocItem_Option.addAttribute(new QName("http://www.w3.org/2001/XMLSchema", "xmlns", "xs"),
+			"http://www.w3.org/2001/XMLSchema");
+	    cwsReqOptDocItem_Option.addAttribute(new QName("http://www.w3.org/2001/XMLSchema-instance", "xmlns", "xsi"),
+			"http://www.w3.org/2001/XMLSchema-instance");
+	    cwsReqOptDocItem_Option.addAttribute(new QName("", "type", "xsi"), "xs:string");
+	    cwsReqOptDocItem_Option.addTextNode(BdocConstants.DIALECT_RASTER_NEVER);
+	}
     }
 }

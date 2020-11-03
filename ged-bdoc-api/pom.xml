@@ -1,9 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>fr.entoria</groupId>
 		<artifactId>ged-bdoc-parent</artifactId>
-		<version>0.0.9-SNAPSHOT</version>
+		<version>0.0.11-SNAPSHOT</version>
 	</parent>
 	<artifactId>ged-bdoc-api</artifactId>
 	<packaging>war</packaging>
@@ -65,6 +67,35 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
 		</dependency>
+
+		<!-- CACHING EHCACHE -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.cache</groupId>
+			<artifactId>cache-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web-services -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.ws.xmlschema/xmlschema-core -->
+		<dependency>
+			<groupId>org.apache.ws.xmlschema</groupId>
+			<artifactId>xmlschema-core</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -72,6 +103,43 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>searchDocuments</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<schemaLanguage>WSDL</schemaLanguage>
+							<schemaDirectory>${project.basedir}/src/main/resources/wsdl</schemaDirectory>
+							<generateDirectory>${project.basedir}/src/main/java</generateDirectory>
+							<generatePackage>fr.entoria.ged.bdoc.soap.models.searchDocuments</generatePackage>
+							<schemaIncludes>
+								<include>searchDocuments.wsdl</include>
+							</schemaIncludes>
+						</configuration>
+					</execution>
+					<execution>
+						<id>getDocumentById</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<schemaLanguage>WSDL</schemaLanguage>
+							<schemaDirectory>${project.basedir}/src/main/resources/wsdl</schemaDirectory>
+							<generateDirectory>${project.basedir}/src/main/java</generateDirectory>
+							<generatePackage>fr.entoria.ged.bdoc.soap.models.getDocumentById</generatePackage>
+							<schemaIncludes>
+								<include>getDocumentById.wsdl</include>
+							</schemaIncludes>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
