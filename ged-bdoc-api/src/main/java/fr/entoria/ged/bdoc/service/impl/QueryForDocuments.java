@@ -19,6 +19,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import fr.entoria.ged.bdoc.api.BdocConstants;
 import fr.entoria.ged.bdoc.api.Token;
 import fr.entoria.ged.bdoc.business.ICaching;
+import fr.entoria.ged.bdoc.enums.BdocQueryOptions;
 import fr.entoria.ged.bdoc.models.QueryForDocumentsResponse;
 import fr.entoria.ged.bdoc.requests.GedBdocApiRequest;
 import fr.entoria.ged.bdoc.service.IQueryForDocuments;
@@ -112,7 +113,20 @@ public class QueryForDocuments extends BdocFunctions implements IQueryForDocumen
 	this.token = apiToken;
 
 	if (!StringUtils.isEmpty(gedBdocApiRequest.getQuery())) {
-	    this.queryCriteria = this.queryMandatory + " AND " + gedBdocApiRequest.getQuery();
+	    try {
+		if (gedBdocApiRequest.getOptions().containsKey(BdocQueryOptions.DOCUMENT_SYSTEM_TYPE)
+			    && Integer.parseInt(gedBdocApiRequest.getOptions()
+					.get(BdocQueryOptions.DOCUMENT_SYSTEM_TYPE)
+					.toString()) > 0) {
+		    this.queryCriteria = "[Document System Type] = " + Integer.valueOf(
+				gedBdocApiRequest.getOptions().get(BdocQueryOptions.DOCUMENT_SYSTEM_TYPE).toString());
+		} else {
+		    this.queryCriteria = this.queryMandatory;
+		}
+	    } catch (NumberFormatException e) {
+		this.queryCriteria = this.queryMandatory;
+	    }
+	    this.queryCriteria += " AND " + gedBdocApiRequest.getQuery();
 	}
 
 	logger.info(LOGGER_HEADER + "Initialize > queryCriteria = " + this.queryCriteria);

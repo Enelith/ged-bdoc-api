@@ -178,7 +178,18 @@ public class LoadDocContents extends BdocFunctions implements ILoadDocContents {
 	cwsReqOptDocItem_Option.addAttribute(new QName("http://www.w3.org/2001/XMLSchema-instance", "xmlns", "xsi"),
 		    "http://www.w3.org/2001/XMLSchema-instance");
 	cwsReqOptDocItem_Option.addAttribute(new QName("", "type", "xsi"), "xs:int");
-	cwsReqOptDocItem_Option.addTextNode(BdocConstants.BDOC_OUTPUTFORMAT_PDF);
+	try {
+	    if (apiRequest.getOptions().containsKey(BdocQueryOptions.OUTPUT_FORMAT)
+			&& Integer.parseInt(
+				    apiRequest.getOptions().get(BdocQueryOptions.OUTPUT_FORMAT).toString()) > 0) {
+		cwsReqOptDocItem_Option
+			    .addTextNode(apiRequest.getOptions().get(BdocQueryOptions.OUTPUT_FORMAT).toString());
+	    } else {
+		cwsReqOptDocItem_Option.addTextNode(BdocConstants.BDOC_OUTPUTFORMAT_PDF);
+	    }
+	} catch (NumberFormatException e) {
+	    cwsReqOptDocItem_Option.addTextNode(BdocConstants.BDOC_OUTPUTFORMAT_PDF);
+	}
 
 	// <cyp:CwsReqOptDocItem>
 	// ---<cyp:Id>Dialect</cyp:Id>
@@ -186,7 +197,7 @@ public class LoadDocContents extends BdocFunctions implements ILoadDocContents {
 	// xsi:xmlns="http://www.w3.org/2001/XMLSchema-instance">raster(never)</cyp:Val>
 	// </cyp:CwsReqOptDocItem>
 	if (apiRequest.getOptions().containsKey(BdocQueryOptions.USE_RASTER_NEVER)
-		    && Boolean.valueOf(apiRequest.getOptions().get(BdocQueryOptions.USE_RASTER_NEVER).toString()) ) {
+		    && Boolean.valueOf(apiRequest.getOptions().get(BdocQueryOptions.USE_RASTER_NEVER).toString())) {
 	    cwsReqOptDocItem = options.addChildElement("CwsReqOptDocItem", request_prefix);
 	    cwsReqOptDocItem_Option = cwsReqOptDocItem.addChildElement("Id", request_prefix);
 	    cwsReqOptDocItem_Option.addTextNode("Dialect");

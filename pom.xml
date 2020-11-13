@@ -11,7 +11,7 @@
 
 	<groupId>fr.entoria</groupId>
 	<artifactId>ged-bdoc-parent</artifactId>
-	<version>0.0.11-SNAPSHOT</version>
+	<version>0.0.12-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Ged BDOC Parent</name>
 	<description>Parent for Ged BDOC</description>
@@ -94,8 +94,8 @@
 	</dependencyManagement>
 
 	<scm>
-		<connection>scm:git:http://git-cipres.intranet.groupemolitor.fr/SOA/cypress-api.git</connection>
-		<developerConnection>scm:git:http://git-cipres.intranet.groupemolitor.fr/SOA/cypress-api.git</developerConnection>
+		<connection>scm:git:<!-- Your Git Project path --></connection>
+		<developerConnection>scm:git:<!-- Your Git Project path --></developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -103,12 +103,12 @@
 		<repository>
 			<id>deployer</id>
 			<name>release customer project</name>
-			<url>http://nexus-cipres.intranet.groupemolitor.fr/repository/cipres-releases/</url>
+			<url><!-- Nexus URL path to releases repository --></url>
 		</repository>
 		<snapshotRepository>
 			<id>deployer</id>
 			<name>snapshot customer project</name>
-			<url>http://nexus-cipres.intranet.groupemolitor.fr/repository/cipres-snapshots/</url>
+			<url><!-- Nexus URL path to snapshots repository --></url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
